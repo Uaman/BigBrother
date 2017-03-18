@@ -1,0 +1,3 @@
+pom.xml merge=ours
+*.properties merge=ours
+*.cfg.xml merge=ours
