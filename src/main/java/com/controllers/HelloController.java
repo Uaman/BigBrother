@@ -22,6 +22,12 @@ public class HelloController {
         return "landing";
     }
 
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profilePage(ModelMap model) {
+
+        return "profile";
+    }
+
     @Autowired
     private ApplicationContext applicationContext;
 

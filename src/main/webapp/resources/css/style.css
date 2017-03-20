@@ -1,34 +1,38 @@
-body {
-	background: url("../img/jumb.jpg");
-	background-size: cover;
+.landing {
+    background: url("../img/jumb.jpg");
+    background-size: cover;
 }
 
-h1 {
-	color: #183152;
+.other {
+    background-color: #e1e6fa;
 }
 
-p {
-	color: #183152;
+h1, h2, p, h4 {
+    color: #183152;
 }
 
 .navbar {
-	background-color: #183152;
+    background-color: #183152;
 }
 
 .navbar .navbar-brand {
-	color: #e1e6fa;
+    color: #e1e6fa;
 }
 
 .navbar-default .navbar-nav li a {
-	color: #e1e6fa;
+    color: #e1e6fa;
 }
 
 .navbar-default .navbar-nav li a:focus, .navbar-default .navbar-nav li a:hover {
-	color: white;
+    color: white;
 }
 
 .btn-primary {
-	background-color: #375d81;
-	color: #e1e6fa;
+    background-color: #375d81;
+    color: #e1e6fa;
+}
+
+.media-object {
+    width: 100px;
 }
 
