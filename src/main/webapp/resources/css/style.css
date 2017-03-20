@@ -1,0 +1,34 @@
+body {
+	background: url("../img/jumb.jpg");
+	background-size: cover;
+}
+
+h1 {
+	color: #183152;
+}
+
+p {
+	color: #183152;
+}
+
+.navbar {
+	background-color: #183152;
+}
+
+.navbar .navbar-brand {
+	color: #e1e6fa;
+}
+
+.navbar-default .navbar-nav li a {
+	color: #e1e6fa;
+}
+
+.navbar-default .navbar-nav li a:focus, .navbar-default .navbar-nav li a:hover {
+	color: white;
+}
+
+.btn-primary {
+	background-color: #375d81;
+	color: #e1e6fa;
+}
+
