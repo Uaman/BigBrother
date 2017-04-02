@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="${postgres.url}"/>
+        <property name="username" value="${postgres.username}"/>
+        <property name="password" value="${postgres.password}"/>
+    </bean>
+    <bean id="mySessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="myDataSource"/>
+        <property name="packagesToScan">
+            <list>
+                <value>com.big_brother.models</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.PostgreSQL9Dialect
+                hibernate.hbm2ddl.auto=create
+                hibernate.show_sql=false
+            </value>
+        </property>
+    </bean>
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

@@ -5,8 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <context:property-placeholder location="WEB-INF/postgres.properties"/>
 
-    <context:component-scan base-package="com.controllers"/>
+    <context:component-scan base-package="com.big_brother.controllers"/>
+    <context:component-scan base-package="com.big_brother.dao"/>
 
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
@@ -15,5 +17,6 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    <import resource="hibernate_config.xml"/>
 
 </beans>

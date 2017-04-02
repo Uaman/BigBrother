@@ -1,7 +1,6 @@
-package com.models;
+package com.big_brother.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +12,7 @@ public class VKStatus {
     private VKUser vkUser;
     private boolean online;
     private Date date;
-    private User user;
+    private SystemUser systemUser;
 
     @Id
     @ManyToOne
@@ -46,25 +45,12 @@ public class VKStatus {
     @Id
     @ManyToOne
     @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_USER"))
-    public User getUser() {
-        return user;
+    public SystemUser getSystemUser() {
+        return systemUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-}
-
-class VKStatusPK implements Serializable {
-    protected VKUser vkUser;
-    protected User user;
-    protected Date date;
-
-    public VKStatusPK() {}
-
-    public VKStatusPK(VKUser vkUser, User user, Date date) {
-        this.vkUser = vkUser;
-        this.user = user;
-        this.date = date;
+    public void setSystemUser(SystemUser systemUser) {
+        this.systemUser = systemUser;
     }
 }
+

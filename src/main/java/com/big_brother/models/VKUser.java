@@ -1,7 +1,6 @@
-package com.models;
+package com.big_brother.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.Set;
@@ -10,40 +9,39 @@ import java.util.Set;
  * Created by Alex on 02.04.2017.
  */
 @Entity
-public class User {
-    private int userId;
-    private String login;
-    private String email;
+public class VKUser {
+    private String vkId;
+    private String firstName;
+    private String lastName;
     private Set<VKStatus> statuses;
     private Set<UserSpied> spiedUsers;
 
     @Id
-    @GeneratedValue
-    public int getUserId() {
-        return userId;
+    public String getVkId() {
+        return vkId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setVkId(String vkId) {
+        this.vkId = vkId;
     }
 
-    public String getLogin() {
-        return login;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "vkUser")
     public Set<VKStatus> getStatuses() {
         return statuses;
     }
@@ -52,7 +50,7 @@ public class User {
         this.statuses = statuses;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "vkUser")
     public Set<UserSpied> getSpiedUsers() {
         return spiedUsers;
     }

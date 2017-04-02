@@ -1,7 +1,6 @@
-package com.models;
+package com.big_brother.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Created by Alex on 02.04.2017.
@@ -9,19 +8,19 @@ import java.io.Serializable;
 @Entity
 @IdClass(UserSpiedPK.class)
 public class UserSpied {
-    private User user;
+    private SystemUser systemUser;
     private VKUser vkUser;
-    private int periodicity;
+    private long periodicity;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_USER"))
-    public User getUser() {
-        return user;
+    public SystemUser getSystemUser() {
+        return systemUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSystemUser(SystemUser systemUser) {
+        this.systemUser = systemUser;
     }
 
     @Id
@@ -35,7 +34,7 @@ public class UserSpied {
         this.vkUser = vkUser;
     }
 
-    public int getPeriodicity() {
+    public long getPeriodicity() {
         return periodicity;
     }
 
@@ -44,14 +43,3 @@ public class UserSpied {
     }
 }
 
-class UserSpiedPK implements Serializable {
-    protected VKUser vkUser;
-    protected User user;
-
-    public UserSpiedPK() {}
-
-    public UserSpiedPK(VKUser vkUser, User user) {
-        this.vkUser = vkUser;
-        this.user = user;
-    }
-}
