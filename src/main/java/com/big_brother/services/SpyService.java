@@ -22,6 +22,6 @@ public class SpyService {
     public void spy(UserSpied userSpied){
         Timer time = new Timer();
         spyTask.setUserSpied(userSpied);
-        time.schedule((TimerTask) spyTask, 0, userSpied.getPeriodicity());
+        time.schedule(spyTask, 0, userSpied.getPeriodicity());
     }
 }

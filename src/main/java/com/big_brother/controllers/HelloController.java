@@ -4,7 +4,6 @@ import com.big_brother.models.SystemUser;
 import com.big_brother.models.UserSpied;
 import com.big_brother.models.VKUser;
 import com.big_brother.services.SpyService;
-import com.big_brother.services.SpyTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
