@@ -38,7 +38,7 @@ public class UserSpied {
         return periodicity;
     }
 
-    public void setPeriodicity(int periodicity) {
+    public void setPeriodicity(long periodicity) {
         this.periodicity = periodicity;
     }
 }

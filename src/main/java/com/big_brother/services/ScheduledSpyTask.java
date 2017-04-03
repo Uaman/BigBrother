@@ -1,14 +1,11 @@
 package com.big_brother.services;
 
 import com.big_brother.dao.GenericDAO;
-import com.big_brother.models.SystemUser;
 import com.big_brother.models.UserSpied;
 import com.big_brother.models.VKStatus;
-import com.big_brother.models.VKUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.TimerTask;

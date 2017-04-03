@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Alex on 03.04.2017.
@@ -21,6 +22,6 @@ public class SpyService {
     public void spy(UserSpied userSpied){
         Timer time = new Timer();
         spyTask.setUserSpied(userSpied);
-        time.schedule(spyTask, 0, userSpied.getPeriodicity());
+        time.schedule((TimerTask) spyTask, 0, userSpied.getPeriodicity());
     }
 }
