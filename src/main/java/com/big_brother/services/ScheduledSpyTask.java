@@ -17,6 +17,8 @@ import java.util.TimerTask;
 @Service
 public class ScheduledSpyTask extends TimerTask{
 
+    @Autowired
+    private GenericDAO dao;
 
     private UserSpied userSpied;
 
@@ -34,5 +36,6 @@ public class ScheduledSpyTask extends TimerTask{
         vkStatus.setDate(new Date());
         vkStatus.setOnline(isOnline);
 
+        dao.save(vkStatus);
     }
 }
