@@ -19,13 +19,14 @@ public class SystemUser {
 
     @Id
     @GeneratedValue
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
 
     public String getLogin() {
         return login;
