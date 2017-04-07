@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -18,44 +18,21 @@
         <h2>Список спостереження</h2>
         <br/>
 
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img class="media-object" src="<c:url value="/resources/img/avatar.png"/>" alt="..." >
-                </a>
+        <c:forEach var="spiedUser" items="${SpiedUsers}">
+            <div class="media">
+                <!--div class="media-left">
+                    <a href="#">
+                        <img class="media-object" src="<c:url value="/resources/img/avatar.png"/>" alt="..." >
+                    </a>
+                </div-->
+                <div class="media-body">
+                    <a href="https://vk.com/id${spiedUser.vkUser.vkId}" target="_blank"><h4 class="media-heading">${spiedUser.vkUser.firstName} ${spiedUser.vkUser.lastName}</h4></a>
+                    <!--p>На спостереженні з </p-->
+                    <a href="#">Деталі</a>
+                </div>
             </div>
-            <div class="media-body">
-                <h4 class="media-heading">John Doe</h4>
-                <p>На спостереженні з 20.02.2017</p>
-                <a href="#">Деталі</a>
-            </div>
-        </div>
+        </c:forEach>
 
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img class="media-object" src="<c:url value="/resources/img/avatar.png"/>" alt="..." >
-                </a>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">John Doe</h4>
-                <p>На спостереженні з 20.02.2017</p>
-                <a href="#">Деталі</a>
-            </div>
-        </div>
-
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img class="media-object" src="<c:url value="/resources/img/avatar.png"/>" alt="..." >
-                </a>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">John Doe</h4>
-                <p>На спостереженні з 20.02.2017</p>
-                <a href="#">Деталі</a>
-            </div>
-        </div>
     </div>
     <div class="col-md-6">
         <h2>Додати нову людину</h2>

@@ -1,14 +1,19 @@
 package com.big_brother.controllers;
 
+import com.big_brother.dao.GenericDAO;
 import com.big_brother.models.SystemUser;
 import com.big_brother.models.UserSpied;
 import com.big_brother.models.VKUser;
 import com.big_brother.services.SpyService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,14 +27,22 @@ public class HelloController {
     @Autowired
     private SpyService spyServiceImpl;
 
+    @Autowired
+    private GenericDAO dao;
+
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
         model.addAttribute("message", "Hello world!");
         return "landing";
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profilePage(ModelMap model) {
+    @Transactional
+    @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
+    public String profilePage(@PathVariable("id") Integer userId, Model model) {
+
+        SystemUser user = dao.get(SystemUser.class, userId);
+        Hibernate.initialize(user.getSpiedUsers());
+        model.addAttribute("SpiedUsers", user.getSpiedUsers());
 
         return "profile";
     }

@@ -1,5 +1,7 @@
 package com.big_brother.dao;
 
+import com.big_brother.models.SystemUser;
+
 import java.util.List;
 
 public interface GenericDAO {
@@ -16,4 +18,6 @@ public interface GenericDAO {
     <T> void saveOrUpdate(T o);
 
     <T> List<T> getAll(Class<T> type);
+
+
 }

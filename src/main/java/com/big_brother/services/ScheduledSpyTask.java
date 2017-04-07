@@ -40,5 +40,6 @@ public class ScheduledSpyTask extends TimerTask{
 
     public void setUserSpied(UserSpied userSpied) {
         this.userSpied = userSpied;
+        dao.save(userSpied);
     }
 }
