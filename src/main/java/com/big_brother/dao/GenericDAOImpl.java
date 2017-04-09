@@ -39,6 +39,11 @@ public class GenericDAOImpl implements GenericDAO {
         return (T) sessionFactory.getCurrentSession().get(type, id);
     }
 
+    @Override
+    public <T> T get(Class<T> type, String id) {
+        return (T) sessionFactory.getCurrentSession().get(type, id);
+    }
+
     /***/
     @Override
     public <T> T merge(final T o)   {

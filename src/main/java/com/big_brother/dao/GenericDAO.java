@@ -13,6 +13,8 @@ public interface GenericDAO {
 
     <T> T get(Class<T> type, Integer id);
 
+    <T> T get(Class<T> type, String id);
+
     <T> T merge(T o);
 
     <T> void saveOrUpdate(T o);

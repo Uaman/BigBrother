@@ -28,7 +28,6 @@
                 <div class="media-body">
                     <a href="https://vk.com/id${spiedUser.vkUser.vkId}" target="_blank"><h4 class="media-heading">${spiedUser.vkUser.firstName} ${spiedUser.vkUser.lastName}</h4></a>
                     <!--p>На спостереженні з </p-->
-                    <a href="#">Деталі</a>
                 </div>
             </div>
         </c:forEach>

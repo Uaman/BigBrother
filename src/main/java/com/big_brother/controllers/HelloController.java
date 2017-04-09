@@ -42,9 +42,28 @@ public class HelloController {
 
         SystemUser user = dao.get(SystemUser.class, userId);
         Hibernate.initialize(user.getSpiedUsers());
+        model.addAttribute("User", user);
         model.addAttribute("SpiedUsers", user.getSpiedUsers());
 
         return "profile";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/profile/{id}/vkuser/{vkId}", method = RequestMethod.GET)
+    public String spiedUserChart(@PathVariable("id") Integer userId, @PathVariable("id") String vkId, Model model) {
+
+        SystemUser user = dao.get(SystemUser.class, userId);
+        UserSpied spiedUser = new UserSpied();
+        for (UserSpied vkUser:user.getSpiedUsers()) {
+            if(vkUser.getVkUser().getVkId().equals(vkId)){
+                spiedUser = vkUser;
+            }
+        }
+
+        Hibernate.initialize(spiedUser.getVkUser().getStatuses());
+        model.addAttribute("Statuses", spiedUser.getVkUser().getStatuses());
+
+        return "spiedUserChart";
     }
 
     @RequestMapping(value = "/spy", method = RequestMethod.GET)
