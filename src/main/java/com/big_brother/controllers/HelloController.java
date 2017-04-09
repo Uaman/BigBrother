@@ -7,16 +7,19 @@ import com.big_brother.models.VKUser;
 import com.big_brother.services.SpyService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by zvazhiidmytro on 18.03.17.
@@ -45,6 +48,12 @@ public class HelloController {
         model.addAttribute("User", user);
         model.addAttribute("SpiedUsers", user.getSpiedUsers());
 
+        //NOTE: created session and added current user id, needs to be moved to authentication when implemented
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession();
+        session.setAttribute("id", userId);
+
         return "profile";
     }
 
@@ -66,23 +75,27 @@ public class HelloController {
         return "spiedUserChart";
     }
 
-    @RequestMapping(value = "/spy", method = RequestMethod.GET)
+    @RequestMapping(value = "/addToSpyList", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void spy(ModelMap model) {
+    public void spy(@ModelAttribute("newVkUser") VKUser vkUser, @ModelAttribute("period") Long period , ModelMap model) {
+        Integer userId = (Integer) getCurrentSession().getAttribute("id");
         UserSpied userSpied = new UserSpied();
-        VKUser vkUser = new VKUser();
-        vkUser.setVkId("1");
         SystemUser systemUser = new SystemUser();
-        systemUser.setUserId(1);
+        systemUser.setUserId(userId);
         userSpied.setVkUser(vkUser);
         userSpied.setSystemUser(systemUser);
-        userSpied.setPeriodicity(10000);
+        userSpied.setPeriodicity(period);
         spyServiceImpl.spy(userSpied);
     }
 
 
     @Autowired
     private ApplicationContext applicationContext;
+
+    private HttpSession getCurrentSession(){
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        return attr.getRequest().getSession();
+    }
 
 
 }
