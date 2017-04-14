@@ -4,6 +4,7 @@ import com.big_brother.dao.GenericDAO;
 import com.big_brother.models.UserSpied;
 import com.big_brother.models.VKStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +14,8 @@ import java.util.TimerTask;
 /**
  * Created by Alex on 03.04.2017.
  */
-@Component
-public class ScheduledSpyTask extends TimerTask{
 
-    @Autowired
-    private GenericDAO dao;
+public class ScheduledSpyTask extends TimerTask{
 
     private UserSpied userSpied;
 
@@ -30,8 +28,8 @@ public class ScheduledSpyTask extends TimerTask{
         vkStatus.setSystemUser(userSpied.getSystemUser());
         vkStatus.setDate(new Date());
         vkStatus.setOnline(isOnline);
-
-        dao.save(vkStatus);
+        ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+        context.getBean(GenericDAO.class).save(vkStatus);
     }
 
     public UserSpied getUserSpied() {
@@ -40,6 +38,5 @@ public class ScheduledSpyTask extends TimerTask{
 
     public void setUserSpied(UserSpied userSpied) {
         this.userSpied = userSpied;
-        dao.save(userSpied);
     }
 }

@@ -18,12 +18,10 @@ import java.util.TimerTask;
 @Service
 public class SpyService {
     @Autowired
-    ScheduledSpyTask spyTask;
-
-    @Autowired
     GenericDAO dao;
 
     @PostConstruct
+    @Transactional
     public void setupSpying(){
         dao.getAll(UserSpied.class).forEach(this::startSpying);
     }
@@ -36,6 +34,7 @@ public class SpyService {
 
     private void startSpying(UserSpied userSpied) {
         Timer time = new Timer();
+        ScheduledSpyTask spyTask = new ScheduledSpyTask();
         spyTask.setUserSpied(userSpied);
         time.schedule(spyTask, 0, userSpied.getPeriodicity());
     }
