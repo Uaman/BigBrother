@@ -39,6 +39,8 @@ public class HelloController {
         return "landing";
     }
 
+
+
     @Transactional
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public String profilePage(@PathVariable("id") Integer userId, Model model) {
@@ -59,7 +61,7 @@ public class HelloController {
 
     @Transactional
     @RequestMapping(value = "/profile/{id}/vkuser/{vkId}", method = RequestMethod.GET)
-    public String spiedUserChart(@PathVariable("id") Integer userId, @PathVariable("id") String vkId, Model model) {
+    public String spiedUserChart(@PathVariable("id") Integer userId, @PathVariable("vkId") String vkId, Model model) {
 
         SystemUser user = dao.get(SystemUser.class, userId);
         UserSpied spiedUser = new UserSpied();
