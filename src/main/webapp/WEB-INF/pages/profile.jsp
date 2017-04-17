@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -37,13 +38,38 @@
     <div class="col-md-6">
         <h2>Додати нову людину</h2>
         <br/>
+    <form:form class="form-horizontal" id="newVkUser" action="/addToSpyList" method="post"
+           commandName="newVkUser">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Введіть нікнейм id" value="${newVkUser.vkId}">
+            </div><!-- /input-group -->
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Введіть нікнейм firstname" value="${newVkUser.firstName}">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Введіть нікнейм lastname" value="${newVkUser.lastname}">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" id="period" class="form-control" placeholder="period" value="${period}">
+                </div>
+            </div>
+        <div class="form-group">
+                    <span class="input-group-btn">
+                        <button id="btn" class="btn btn-default" type="submit">Додати</button>
+                    </span>
+        </div>
 
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Введіть нікнейм...">
-            <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Додати</button>
-      </span>
-        </div><!-- /input-group -->
+
+    </form:form>
+
+
     </div>
 </div>
 
