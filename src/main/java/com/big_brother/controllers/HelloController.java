@@ -44,9 +44,9 @@ public class HelloController {
     public String profilePage(@PathVariable("id") Integer userId, Model model) {
 
         SystemUser user = dao.get(SystemUser.class, userId);
-        Hibernate.initialize(user.getSpiedUsers());
+        //Hibernate.initialize(user.getSpiedUsers());
         model.addAttribute("User", user);
-        model.addAttribute("SpiedUsers", user.getSpiedUsers());
+        //model.addAttribute("SpiedUsers", user.getSpiedUsers());
 
         //NOTE: created session and added current user id, needs to be moved to authentication when implemented
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
