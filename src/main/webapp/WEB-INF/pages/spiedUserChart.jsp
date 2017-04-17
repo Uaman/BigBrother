@@ -34,83 +34,112 @@
 <!-- Resources -->
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/amstock.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
 <!-- Chart code -->
 <script>
     var chartData = generateChartData();
-    var chart = AmCharts.makeChart("chartdiv", {
-        "type": "serial",
-        "theme": "light",
-        "marginRight": 80,
-        "autoMarginOffset": 20,
-        "marginTop": 7,
-        "dataProvider": chartData,
-        "valueAxes": [{
-            "axisAlpha": 0.2,
-            "dashLength": 1,
-            "position": "left"
-        }],
-        "mouseWheelZoomEnabled": true,
-        "graphs": [{
-            "id": "g1",
-            "balloonText": "[[value]]",
-            "bullet": "round",
-            "bulletBorderAlpha": 1,
-            "bulletColor": "#FFFFFF",
-            "hideBulletsCount": 50,
-            "title": "red line",
-            "valueField": "visits",
-            "useLineColorForBulletBorder": true,
-            "balloon":{
-                "drop":true
-            }
-        }],
-        "chartScrollbar": {
-            "autoGridCount": true,
-            "graph": "g1",
-            "scrollbarHeight": 40
-        },
-        "chartCursor": {
-            "limitToGraph":"g1"
-        },
-        "categoryField": "date",
-        "categoryAxis": {
-            "parseDates": true,
-            "axisColor": "#DADADA",
-            "dashLength": 1,
-            "minorGridEnabled": true
-        },
-        "export": {
-            "enabled": true
-        }
-    });
 
-    chart.addListener("rendered", zoomChart);
-    zoomChart();
-
-    // this method is called when chart is first inited as we listen for "rendered" event
-    function zoomChart() {
-        // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-        chart.zoomToIndexes(chartData.length - 40, chartData.length - 1);
-    }
-
-
-    // generate some random data, quite different range
     function generateChartData() {
         var chartData = [];
-        var firstDate = new Date();
 
         <c:forEach items="${Statuses}" var="status">
         chartData.push({
-            date: new Date("${status.date}"),
-            visits: ${status.online}
+            "date": new Date("${status.date}"),
+            "value": ${status.online}
         });
         </c:forEach>
 
         return chartData;
     }
+
+    var chart = AmCharts.makeChart( "chartdiv", {
+        "type": "stock",
+        "theme": "light",
+        "categoryAxesSettings": {
+            "minPeriod": "mm"
+        },
+
+        "dataSets": [ {
+            "color": "#b0de09",
+            "fieldMappings": [ {
+                "fromField": "value",
+                "toField": "value"
+            }],
+
+            "dataProvider": chartData,
+            "categoryField": "date"
+        } ],
+
+        "panels": [ {
+            "showCategoryAxis": false,
+            "title": "Value",
+            "percentHeight": 70,
+
+            "stockGraphs": [ {
+                "id": "g1",
+                "valueField": "value",
+                "type": "smoothedLine",
+                "lineThickness": 2,
+                "bullet": "round"
+            } ],
+
+
+            "stockLegend": {
+                "valueTextRegular": " ",
+                "markerType": "none"
+            }
+        }],
+
+        "chartScrollbarSettings": {
+            "graph": "g1",
+            "usePeriod": "10mm",
+            "position": "top"
+        },
+
+        "chartCursorSettings": {
+            "valueBalloonsEnabled": true
+        },
+
+        "periodSelector": {
+            "position": "top",
+            "dateFormat": "YYYY-MM-DD JJ:NN",
+            "inputFieldWidth": 150,
+            "periods": [ {
+                "period": "hh",
+                "count": 1,
+                "label": "1 hour",
+                "selected": true
+            }, {
+                "period": "hh",
+                "count": 2,
+                "label": "2 hours"
+            }, {
+                "period": "hh",
+                "count": 5,
+                "label": "5 hour"
+            }, {
+                "period": "hh",
+                "count": 12,
+                "label": "12 hours"
+            }, {
+                "period": "MAX",
+                "label": "MAX"
+            } ]
+        },
+
+        "panelsSettings": {
+            "usePrefixes": true
+        },
+
+        "export": {
+            "enabled": true,
+            "position": "bottom-right"
+        }
+    } );
 </script>
 </body>
 </html>
