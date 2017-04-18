@@ -83,7 +83,7 @@
                 "id": "g1",
                 "valueField": "value",
                 "type": "smoothedLine",
-                "lineThickness": 2,
+                "lineThickness": 0,
                 "bullet": "round"
             } ],
 
@@ -104,32 +104,32 @@
             "valueBalloonsEnabled": true
         },
 
-        "periodSelector": {
-            "position": "top",
-            "dateFormat": "YYYY-MM-DD JJ:NN",
-            "inputFieldWidth": 150,
-            "periods": [ {
-                "period": "hh",
-                "count": 1,
-                "label": "1 hour",
-                "selected": true
-            }, {
-                "period": "hh",
-                "count": 2,
-                "label": "2 hours"
-            }, {
-                "period": "hh",
-                "count": 5,
-                "label": "5 hour"
-            }, {
-                "period": "hh",
-                "count": 12,
-                "label": "12 hours"
-            }, {
-                "period": "MAX",
-                "label": "MAX"
-            } ]
-        },
+//        "periodSelector": {
+//            "position": "top",
+//            "dateFormat": "YYYY-MM-DD JJ:NN",
+//            "inputFieldWidth": 150,
+//            "periods": [ {
+//                "period": "hh",
+//                "count": 1,
+//                "label": "1 hour",
+//                "selected": true
+//            }, {
+//                "period": "hh",
+//                "count": 2,
+//                "label": "2 hours"
+//            }, {
+//                "period": "hh",
+//                "count": 5,
+//                "label": "5 hour"
+//            }, {
+//                "period": "hh",
+//                "count": 12,
+//                "label": "12 hours"
+//            }, {
+//                "period": "MAX",
+//                "label": "MAX"
+//            } ]
+//        },
 
         "panelsSettings": {
             "usePrefixes": true

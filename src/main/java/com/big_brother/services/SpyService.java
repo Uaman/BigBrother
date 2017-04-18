@@ -28,6 +28,7 @@ public class SpyService {
 
     @Transactional
     public void spy(UserSpied userSpied){
+        dao.saveOrUpdate(userSpied.getVkUser());
         dao.save(userSpied);
         startSpying(userSpied);
     }

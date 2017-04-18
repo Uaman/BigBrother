@@ -38,26 +38,26 @@
     <div class="col-md-6">
         <h2>Додати нову людину</h2>
         <br/>
-    <form:form class="form-horizontal" id="newVkUser" action="/addToSpyList" method="post"
+    <form:form class="form-horizontal" id="newVkUser" action="/profile/${User.userId}/vkuser" method="post"
            commandName="newVkUser">
         <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Введіть нікнейм id" value="${newVkUser.vkId}">
+                <form:input type="text" class="form-control" placeholder="Введіть нікнейм id" path="vkUser.vkId"/>
             </div><!-- /input-group -->
         </div>
         <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Введіть нікнейм firstname" value="${newVkUser.firstName}">
+                <form:input type="text" class="form-control" placeholder="Введіть нікнейм firstname" path="vkUser.firstName"/>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Введіть нікнейм lastname" value="${newVkUser.lastname}">
+                <form:input type="text" class="form-control" placeholder="Введіть нікнейм lastname" path="vkUser.lastName"/>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <input type="text" id="period" class="form-control" placeholder="period" value="${period}">
+                <form:input type="text" id="period" class="form-control" placeholder="period" path="periodicity"/>
                 </div>
             </div>
         <div class="form-group">

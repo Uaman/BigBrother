@@ -46,16 +46,16 @@ public class HelloController {
     public String profilePage(@PathVariable("id") Integer userId, Model model) {
 
         SystemUser user = dao.get(SystemUser.class, userId);
-        //Hibernate.initialize(user.getSpiedUsers());
+        Hibernate.initialize(user.getSpiedUsers());
         model.addAttribute("User", user);
-        //model.addAttribute("SpiedUsers", user.getSpiedUsers());
+        model.addAttribute("SpiedUsers", user.getSpiedUsers());
 
         //NOTE: created session and added current user id, needs to be moved to authentication when implemented
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session = attr.getRequest().getSession();
-        session.setAttribute("id", userId);
-
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//        HttpSession session = attr.getRequest().getSession();
+//        session.setAttribute("id", userId);
+        model.addAttribute("newVkUser", new UserSpied());
         return "profile";
     }
 
@@ -77,17 +77,19 @@ public class HelloController {
         return "spiedUserChart";
     }
 
-    @RequestMapping(value = "/addToSpyList", method = RequestMethod.POST)
+    @RequestMapping(value = "/profile/{id}/vkuser", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void spy(@ModelAttribute("newVkUser") VKUser vkUser, @ModelAttribute("period") Long period , ModelMap model) {
-        Integer userId = (Integer) getCurrentSession().getAttribute("id");
-        UserSpied userSpied = new UserSpied();
+    public String spy(@PathVariable("id") Integer userId, @ModelAttribute("newVkUser") UserSpied userSpied) {
         SystemUser systemUser = new SystemUser();
         systemUser.setUserId(userId);
-        userSpied.setVkUser(vkUser);
         userSpied.setSystemUser(systemUser);
-        userSpied.setPeriodicity(period);
         spyServiceImpl.spy(userSpied);
+        return "profile";
+    }
+
+    @ModelAttribute
+    public void providePeriod(Model model){
+        //model.addAttribute("period", new Long((Integer)model.asMap().get("period")));
     }
 
 
