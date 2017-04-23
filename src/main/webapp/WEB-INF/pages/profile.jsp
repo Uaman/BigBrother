@@ -29,7 +29,7 @@
                 <div class="media-body">
                     <a href="https://vk.com/id${spiedUser.vkUser.vkId}" target="_blank"><h4 class="media-heading">${spiedUser.vkUser.firstName} ${spiedUser.vkUser.lastName}</h4></a>
                     <!--p>На спостереженні з </p-->
-                    <a href="/profile/${User.userId}/vkuser/${spiedUser.vkUser.vkId}">Деталі</a>
+                    <a href="/profile/${User.login}/vkuser/${spiedUser.vkUser.vkId}">Деталі</a>
                 </div>
             </div>
         </c:forEach>
@@ -38,7 +38,7 @@
     <div class="col-md-6">
         <h2>Додати нову людину</h2>
         <br/>
-    <form:form class="form-horizontal" id="newVkUser" action="/profile/${User.userId}/vkuser" method="post"
+    <form:form class="form-horizontal" id="newVkUser" action="/profile/${User.login}/vkuser" method="post"
            commandName="newVkUser">
         <div class="form-group">
             <div class="input-group">
