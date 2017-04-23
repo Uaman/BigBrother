@@ -78,20 +78,13 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/profile/{id}/vkuser", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
     public String spy(@PathVariable("id") Integer userId, @ModelAttribute("newVkUser") UserSpied userSpied) {
         SystemUser systemUser = new SystemUser();
         systemUser.setUserId(userId);
         userSpied.setSystemUser(systemUser);
         spyServiceImpl.spy(userSpied);
-        return "profile";
+        return "redirect:/profile/" + userId;
     }
-
-    @ModelAttribute
-    public void providePeriod(Model model){
-        //model.addAttribute("period", new Long((Integer)model.asMap().get("period")));
-    }
-
 
     @Autowired
     private ApplicationContext applicationContext;
