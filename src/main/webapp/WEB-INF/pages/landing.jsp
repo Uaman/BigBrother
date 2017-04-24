@@ -19,7 +19,7 @@
         <p style="width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.</p>
         <c:url var="loginUrl" value="/" />
         <c:choose>
-            <c:when test="${login == null}">
+            <c:when test="${sessionScope.login == null}">
                 <form action="login" method="post" class="form-horizontal">
                     <c:if test="${param.error != null}">
                     <div class="alert alert-danger">

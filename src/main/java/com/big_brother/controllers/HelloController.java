@@ -40,10 +40,10 @@ public class HelloController {
     private GenericDAO dao;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String printWelcome(ModelMap model) {
+    public String printWelcome(HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth != null && auth.getAuthorities().contains(new SimpleGrantedAuthority("USER"))) {
-            model.addAttribute("login", auth.getName());
+            request.getSession().setAttribute("login", auth.getName());
         }
         return "landing";
     }
