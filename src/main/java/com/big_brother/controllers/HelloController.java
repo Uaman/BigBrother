@@ -8,6 +8,7 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,7 @@ public class HelloController {
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth != null) {
+        if(auth != null && auth.getAuthorities().contains(new SimpleGrantedAuthority("USER"))) {
             model.addAttribute("login", auth.getName());
         }
         return "landing";
