@@ -8,4 +8,6 @@ import com.big_brother.models.SystemUser;
 
 public interface SystemUserDAO{
     SystemUser getSystemUserByLogin(String login);
+
+    void saveSystemUser(SystemUser user);
 }

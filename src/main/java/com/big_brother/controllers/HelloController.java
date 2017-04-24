@@ -1,6 +1,7 @@
 package com.big_brother.controllers;
 
 import com.big_brother.dao.GenericDAO;
+import com.big_brother.dao.SystemUserDAO;
 import com.big_brother.models.SystemUser;
 import com.big_brother.models.UserSpied;
 import com.big_brother.services.SpyService;
@@ -31,6 +32,9 @@ import javax.servlet.http.HttpSession;
 public class HelloController {
     @Autowired
     private SpyService spyServiceImpl;
+
+    @Autowired
+    private SystemUserDAO systemUserDAO;
 
     @Autowired
     private GenericDAO dao;
@@ -119,5 +123,18 @@ public class HelloController {
         return attr.getRequest().getSession();
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String getRegistrationPage(Model model){
+        model.addAttribute("user", new SystemUser());
+        return "register";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String performeRegistration(@ModelAttribute("user") SystemUser user,@RequestParam("confirm_pass") String confirm_pass , Model model){
+        if(!user.getPassword().equals(confirm_pass)) return "redirect:/register";
+        dao.save(user);
+        return "redirect:/";
+    }
 
 }

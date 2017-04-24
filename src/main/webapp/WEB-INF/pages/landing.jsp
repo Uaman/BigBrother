@@ -46,7 +46,7 @@
                                class="btn btn-block btn-primary btn-default" value="Log in">
                     </div>
                 </form>
-                <p><a class="btn btn-primary btn-lg" href="/signup" role="button">Sign up</a></p>
+                <p><a class="btn btn-primary btn-lg" href="/register" role="button">Sign up</a></p>
             </c:when>
             <c:otherwise><p><a class="btn btn-primary btn-lg" href="/profile/${login}" role="button">Watch users</a></p></c:otherwise>
         </c:choose>
