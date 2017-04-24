@@ -16,7 +16,7 @@
 <div id="main-content" class="container">
     <div class="container">
         <h1>Big Brother</h1>
-        <p style="width: 400px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.</p>
+        <p style="width: 400px">System that allows you to monitor users of VK social network for online / not online</p>
         <c:url var="loginUrl" value="/" />
         <c:choose>
             <c:when test="${sessionScope.login == null}">
